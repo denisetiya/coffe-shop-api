@@ -11,7 +11,7 @@ export class AuthController {
   // Endpoint Register
   @Post('register')
   async register(
-    @Body() body: { email: string, password: string},
+    @Body() body: { email: string, password: string, username: string },
     @Res() res: Response ) {
     const userExists = await this.authService.findUserByEmail(body.email);
 
@@ -19,7 +19,7 @@ export class AuthController {
       throw new BadRequestException('User with this email already exists');
     }
 
-    const user = await this.authService.createNewUser(body.email, body.password);
+    const user = await this.authService.createNewUser(body.username,body.email, body.password);
     
     const accessToken = await this.authService.generateAccessToken(user);
     const refreshToken = await this.authService.generateRefreshToken(user.id);

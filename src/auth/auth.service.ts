@@ -11,10 +11,11 @@ export class AuthService {
   ) {}
 
   // Fungsi untuk membuat user baru
-  async createNewUser(email: string, password: string) {
+  async createNewUser(username: string, email: string, password: string) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await this.prisma.user.create({
       data: {
+        username,
         email,
         password: hashedPassword,
       },

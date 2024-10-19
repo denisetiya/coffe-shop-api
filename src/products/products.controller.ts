@@ -1,5 +1,5 @@
 import { genericProduct, Product } from 'src/utils/Interface';
-import { Controller, Post, UploadedFile, UseInterceptors, Body, Res } from '@nestjs/common';
+import { Controller, Post, UploadedFile, Put,Get, Delete,UseInterceptors, Body, Res, Param, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductsService } from './products.service';
 import response from 'src/utils/Response';
@@ -27,14 +27,38 @@ export class ProductsController {
     return this.productsService.addProduct(productData);
   }
 
-  async getProducts(@Body() data: Product, @Res() res: Response) {
+  @Get('')
+  async getProducts(@Query() data: genericProduct , @Res() res: Response) {
     const product = await this.productsService.getProducts(data);
     if (!product) {
         return response(res, 404, "", null, "Product not found");
     }
-
+    if (Array.isArray(product)) {
+      if (product.length === 0) {
+        return response(res, 200, "No product found", null, null);
+      }
+    }
     return response(res, 200, "success get product", product);
+  }
 
+  @Put('edit/:id')
+  async editProduct(@Param('id') id: string, @Body() data: Product, @Res() res: Response) {
+    const product = await this.productsService.updateProduct(id, data);
+    if (!product) {
+        return response(res, 404, "", null, "Product not found");
+    }
+
+    return response(res, 200, "success edit product", product);
+  } 
+
+  @Delete('delete/:id')
+  async deleteProduct(@Param('id') id: string, @Res() res: Response) {
+    const product = await this.productsService.deleteProduct(id);
+    if (!product) {
+        return response(res, 404, "", null, "Product not found");
+    }
+
+    return response(res, 200, "success delete product", product);
   }
 
 

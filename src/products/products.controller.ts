@@ -4,6 +4,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductsService } from './products.service';
 import response from 'src/utils/Response';
 import { Response } from 'express';
+import { parse } from 'path';
 
 
 @Controller('products')
@@ -16,12 +17,14 @@ export class ProductsController {
     @Body() body, 
     @UploadedFile() file: Express.Multer.File
   ) {
+
     const productData = {
       name: body.name,
-      price: body.price,
+      price: parseInt(body.price),
       category: body.category,
-      discount: body.discount,
+      discount: parseInt(body.discount),
       description: body.description,
+      recommended: body.recommended === 'true' || body.recommended === true,
       picture: file ? file.filename : null, 
     };
     return this.productsService.addProduct(productData);

@@ -4,6 +4,7 @@ export interface Product {
     price: number, 
     category: string, 
     discount?: number, 
+    recommended?: boolean
     description: string
 }
 
@@ -14,4 +15,5 @@ export interface genericProduct {
     price2?: number, 
     category?: string, 
     discount?: number, 
+    recommended?: boolean
 }

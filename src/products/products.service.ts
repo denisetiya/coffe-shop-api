@@ -16,7 +16,8 @@ export class ProductsService {
                     price: Product.price,
                     category: Product.category,
                     discount: Product.discount,
-                    description: Product.description
+                    description: Product.description,
+                    recommended: Product.recommended
                 }
             })
             return newProduct

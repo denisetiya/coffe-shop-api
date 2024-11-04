@@ -11,24 +11,24 @@ import { parse } from 'path';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Post('add')
-  @UseInterceptors(FileInterceptor('picture'))
-  async addProduct(
-    @Body() body, 
-    @UploadedFile() file: Express.Multer.File
-  ) {
+  // @Post('add')
+  // @UseInterceptors(FileInterceptor('picture'))
+  // async addProduct(
+  //   @Body() body, 
+  //   @UploadedFile() file: Express.Multer.File
+  // ) {
 
-    const productData = {
-      name: body.name,
-      price: parseInt(body.price),
-      category: body.category,
-      discount: parseInt(body.discount),
-      description: body.description,
-      recommended: body.recommended === 'true' || body.recommended === true,
-      picture: file ? file.filename : null, 
-    };
-    return this.productsService.addProduct(productData);
-  }
+  //   const productData = {
+  //     name: body.name,
+  //     price: parseInt(body.price),
+  //     category: body.category,
+  //     discount: parseInt(body.discount),
+  //     description: body.description,
+  //     recommended: body.recommended === 'true' || body.recommended === true,
+  //     picture: file ? file.filename : null, 
+  //   };
+  //   return this.productsService.addProduct(productData);
+  // }
 
   @Get('')
   async getProducts(@Query() data: genericProduct , @Res() res: Response) {
@@ -44,25 +44,25 @@ export class ProductsController {
     return response(res, 200, "success get product", product);
   }
 
-  @Put('edit/:id')
-  async editProduct(@Param('id') id: string, @Body() data: Product, @Res() res: Response) {
-    const product = await this.productsService.updateProduct(id, data);
-    if (!product) {
-        return response(res, 404, "", null, "Product not found");
-    }
+  // @Put('edit/:id')
+  // async editProduct(@Param('id') id: string, @Body() data: Product, @Res() res: Response) {
+  //   const product = await this.productsService.updateProduct(id, data);
+  //   if (!product) {
+  //       return response(res, 404, "", null, "Product not found");
+  //   }
 
-    return response(res, 200, "success edit product", product);
-  } 
+  //   return response(res, 200, "success edit product", product);
+  // } 
 
-  @Delete('delete/:id')
-  async deleteProduct(@Param('id') id: string, @Res() res: Response) {
-    const product = await this.productsService.deleteProduct(id);
-    if (!product) {
-        return response(res, 404, "", null, "Product not found");
-    }
+  // @Delete('delete/:id')
+  // async deleteProduct(@Param('id') id: string, @Res() res: Response) {
+  //   const product = await this.productsService.deleteProduct(id);
+  //   if (!product) {
+  //       return response(res, 404, "", null, "Product not found");
+  //   }
 
-    return response(res, 200, "success delete product", product);
-  }
+  //   return response(res, 200, "success delete product", product);
+  // }
 
 
 }

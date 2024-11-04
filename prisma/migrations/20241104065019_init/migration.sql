@@ -1,11 +1,11 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" STRING NOT NULL,
-    "username" STRING NOT NULL,
-    "email" STRING NOT NULL,
-    "password" STRING NOT NULL,
-    "picture" STRING,
-    "refreshToken" STRING,
+    "id" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "picture" TEXT,
+    "refreshToken" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -14,15 +14,15 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" STRING NOT NULL,
-    "name" STRING NOT NULL,
-    "picture" STRING,
-    "price" INT4 NOT NULL,
-    "star" FLOAT8,
-    "category" STRING NOT NULL,
-    "discount" FLOAT8,
-    "recommended" BOOL NOT NULL DEFAULT false,
-    "description" STRING,
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "picture" TEXT,
+    "price" INTEGER NOT NULL,
+    "star" DOUBLE PRECISION,
+    "category" TEXT NOT NULL,
+    "discount" DOUBLE PRECISION,
+    "recommended" BOOLEAN NOT NULL DEFAULT false,
+    "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
